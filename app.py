@@ -12,8 +12,22 @@ import base64
 from io import StringIO
 import warnings
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, mean_absolute_error, roc_curve, auc, precision_recall_curve, confusion_matrix
-
+import json
+from streamlit_lottie import st_lottie
 warnings.filterwarnings('ignore')
+# Charger le fichier JSON localement
+st.markdown("""
+<style>
+.stLottie {
+    background: transparent !important;
+}
+</style>
+""", unsafe_allow_html=True)
+with open("iaanim.json", "r") as f:
+    lottie_animation = json.load(f)
+
+# Afficher dans l’app
+st_lottie(lottie_animation, height=300, key="local_animation")
 
 # =======================================================
 # CONFIGURATION DE LA PAGE
@@ -68,7 +82,7 @@ def inject_custom_css():
             border-bottom: 2px solid var(--primary);
             padding-bottom: 10px;
         }}
-
+        
         /* Boutons */
         .stButton>button {{
             background: linear-gradient(45deg, var(--primary), #E8A798);
@@ -915,7 +929,7 @@ def main():
         tpr = [0.0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 1.0]
         pr_precision = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5]
         pr_recall = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-        conf_matrix = np.array([[832, 201], [63, 311]])
+        conf_matrix = np.array([[63, 311], [832, 201]])
 
         feature_imp = model.get_feature_importance() if hasattr(model, 'get_feature_importance') else np.random.rand(
             len(expected_feature_names))
