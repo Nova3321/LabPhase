@@ -1,8 +1,8 @@
-streamlit
-streamlit-lottie
-plotly
 catboost
+imbalanced-learn
 scikit-learn
 pandas
 numpy
-requests
+plotly
+streamlit
+streamlit-lottie
